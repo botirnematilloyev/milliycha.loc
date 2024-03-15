@@ -214,6 +214,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+    public function getManager()
+    {
+        return $this->hasOne(MakeCompany::class, ['id' => 'manager_id']);
+    }
 
     public function isAdmin()
     {
@@ -224,3 +228,4 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->role == self::ROLE_MANAGER ? true : false;
     }
 }
+

@@ -45,8 +45,4 @@ class Order extends \yii\db\ActiveRecord
             'total_price' => 'Total Price',
         ];
     }
-    public function getRestaurant()
-    {
-        return $this->hasOne(MakeCompany::className(),['restaurant_id'=>'id']);
-    }
 }

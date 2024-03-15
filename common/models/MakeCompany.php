@@ -9,7 +9,6 @@ use Yii;
  *
  * @property int $id
  * @property string $title
- * @property int $main
  * @property float $longitude
  * @property float $latitude
  */
@@ -43,9 +42,12 @@ class MakeCompany extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
-            'main' => 'Main',
             'longitude' => 'Longitude',
             'latitude' => 'Latitude',
         ];
+    }
+    public function getRestaurants()
+    {
+        return $this->hasMany(MakeCompany::class, ['manager_id' => 'id']);
     }
 }

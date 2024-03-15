@@ -71,15 +71,19 @@ class OrderController extends Controller
     {
         $card = new OrderItem();
         if ($this->request->isPost && $card->load($this->request->post())) {
-            $card->meal_id = $id;
-            $card->status = OrderStatus::PRE;
-            if(!isset($card->count) || $card->count==0){
-                $card->count = 1;
-            }
-            $card->total_sum = ($this->findFood($id)->cost*$card->count);
-            $card->user_id = Yii::$app->user->id;
-            if($card->save()) {
-                return $this->redirect('card');
+            if(Yii::$app->user->isGuest){
+                Yii::$app->session->setFlash('error','Tizimda ro`yxatdan o`ting <br><a href="/site/login">Login</a>');
+            }else{
+                $card->meal_id = $id;
+                $card->status = OrderStatus::PRE;
+                if(!isset($card->count) || $card->count==0){
+                    $card->count = 1;
+                }
+                $card->total_sum = ($this->findFood($id)->cost*$card->count);
+                $card->user_id = Yii::$app->user->id;
+                if($card->save()) {
+                    return $this->redirect('card');
+                }
             }
         } else {
             $card->loadDefaultValues();

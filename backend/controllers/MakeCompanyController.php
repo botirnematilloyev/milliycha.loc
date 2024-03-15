@@ -4,10 +4,12 @@ namespace backend\controllers;
 
 use common\models\MakeCompany;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
+use common\models\User;
+use Yii;
 
 /**
  * MakeCompanyController implements the CRUD actions for MakeCompany model.
@@ -26,7 +28,6 @@ class MakeCompanyController extends Controller
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
-                        'create' => [\Yii::$app->user->identity->isAdmin()],
                     ],
                 ],
             ]
@@ -42,16 +43,14 @@ class MakeCompanyController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => MakeCompany::find(),
-            /*
             'pagination' => [
-                'pageSize' => 50
+                'pageSize' => 10
             ],
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC,
                 ]
-            ],
-            */
+            ]
         ]);
 
         return $this->render('index', [
@@ -80,17 +79,21 @@ class MakeCompanyController extends Controller
     public function actionCreate()
     {
         $model = new MakeCompany();
-
+        /** @var TYPE_NAME $users */
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $model->manager_id = Yii::$app->request->post('MakeCompany')['manager_id'];
+                if($model->save()){
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
         } else {
             $model->loadDefaultValues();
         }
-
+        $users = ArrayHelper::map(User::find()->where(['role'=>User::ROLE_MANAGER])->asArray()->all(), 'id', 'username');
         return $this->render('create', [
             'model' => $model,
+            'users' => $users
         ]);
     }
 

@@ -6,13 +6,16 @@ use yii\widgets\ActiveForm;
 /** @var yii\web\View $this */
 /** @var common\models\MakeCompany $model */
 /** @var yii\widgets\ActiveForm $form */
+/** @var TYPE_NAME $users */
 ?>
 
 <div class="make-company-form">
 
-    <?php $form = ActiveForm::begin(); $model->main=0;?>
+    <?php $form = ActiveForm::begin();?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'manager_id')->dropDownList($users);?>
 
     <?= $form->field($model, 'longitude')->textInput() ?>
 

@@ -39,6 +39,10 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Meal Category', 'url' => ['/meal-category']];
         $menuItems[] = ['label' => 'Meals', 'url' => ['/meal-add']];
         $menuItems[] = ['label' => 'Branches', 'url' => ['/make-company']];
+        $menuItems[] = ['label' => 'Administration', 'url' => ['/set-admin']];
+    }
+    if (Yii::$app->user->identity->isManager()) {
+        $menuItems[] = ['label' => 'Orders', 'url' => ['/cook']];
     }
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];

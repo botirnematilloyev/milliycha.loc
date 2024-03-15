@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'main',
+            'manager_id',
             'longitude',
             'latitude',
             [

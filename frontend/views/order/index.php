@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <tr>
                                 <td>".$datum->type."</td>
                                 <td>".$datum->order_status."</td>
-                                <td>".$datum->restaurant_id."</td>
+                                <td>".\common\models\MakeCompany::findOne($datum->restaurant_id)->title."</td>
                                 <td>".$datum->ordered_time."</td>
                                 <td>".$datum->total_price."</td>
                             </tr>";
