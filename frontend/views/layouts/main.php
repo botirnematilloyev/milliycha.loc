@@ -37,7 +37,7 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Bosh sahifa', 'url' => ['/site/index']],
         ['label' => 'Taomlar', 'url' => ['/order-meal/menu']],
-        ['label' => 'Korzinka', 'url' => ['/order-meal/orders']],
+        ['label' => 'Korzinka', 'url' => ['/order/card']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];

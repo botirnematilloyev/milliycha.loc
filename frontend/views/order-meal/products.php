@@ -24,7 +24,7 @@ use yii\helpers\Html;
                 <td>$datum->name</td>
                 <td>$datum->ingredients</td>
                 <td>$datum->cost</td>
-                <td>".Html::a('Ko`rish',['single-product','id'=>$datum->id],['class'=>'btn btn-primary'])."</td>
+                <td>".Html::a('Ko`rish',['order/view','id'=>$datum->id],['class'=>'btn btn-primary'])."</td>
               <tr>";
     }
 ?>

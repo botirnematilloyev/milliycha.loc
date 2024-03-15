@@ -1,8 +1,6 @@
 <?php
 
-namespace frontend\models;
-
-use Yii;
+namespace common\models;
 
 /**
  * This is the model class for table "orders".
@@ -13,7 +11,7 @@ use Yii;
  * @property string|null $order_status
  * @property int|null $total_price
  */
-class OrderMeal extends \yii\db\ActiveRecord
+class Order extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -29,9 +27,8 @@ class OrderMeal extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'order_status'], 'string'],
-            [['ordered_time'], 'safe'],
-            [['total_price'], 'integer'],
+            ['type', 'string'],
+            [['total_price','order_status','restaurant_id'], 'integer'],
         ];
     }
 
@@ -47,5 +44,9 @@ class OrderMeal extends \yii\db\ActiveRecord
             'order_status' => 'Order Status',
             'total_price' => 'Total Price',
         ];
+    }
+    public function getRestaurant()
+    {
+        return $this->hasOne(MakeCompany::className(),['restaurant_id'=>'id']);
     }
 }

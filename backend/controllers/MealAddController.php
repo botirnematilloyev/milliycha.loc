@@ -153,7 +153,6 @@ class MealAddController extends Controller
         if (($model = Meal::findOne(['id' => $id])) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\models\Order;
+use common\models\OrderStatus;
 use Yii;
 use common\models\Meal;
 use common\models\MealCategory;
@@ -75,8 +77,8 @@ class OrderMealController extends Controller
         }
         $model = new OrderItem();
         if ($this->request->isPost && $model->load($this->request->post())) {
-                $model->cost = $product->cost;
                 $model->meal_id = $id;
+                $model->status = OrderStatus::PRE;
                 if(!isset($model->count) || $model->count==0){
                     $model->count = 1;
                 }
@@ -93,7 +95,8 @@ class OrderMealController extends Controller
     public function actionOrders()
     {
         $model = OrderItem::find()->where(['user_id'=>Yii::$app->user->id])->all();
-        return $this->render('orders',['model'=>$model]);
+        $orders = Order::find()->all();
+        return $this->render('orders',['buyurtma'=>$orders,'model'=>$model]);
     }
 
     public function actionSendOrder($id)

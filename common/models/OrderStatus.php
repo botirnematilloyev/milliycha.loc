@@ -4,6 +4,7 @@ namespace common\models;
 
 class OrderStatus
 {
+    const PRE = -11;
     const IN_BASKET = 0;
     const NEW = 1;
     const ACCEPTED = 2;

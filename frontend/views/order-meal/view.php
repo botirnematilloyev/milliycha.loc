@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var frontend\models\OrderMeal $model */
+/** @var \common\models\OrderMeal $model */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Order Meals', 'url' => ['index']];
