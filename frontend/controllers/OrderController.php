@@ -105,6 +105,7 @@ class OrderController extends Controller
                 $query->ordered_time = date('Y-m-d H:i:s', time());
                 $query->order_status = OrderStatus::NEW;
                 $query->total_price = OrderItem::find()->where(['user_id'=>Yii::$app->user->id,'status'=>-11])->sum('total_sum');
+                $query->user_id = Yii::$app->user->id;
 
                 if ($query->save()) {
                     Yii::$app->db->createCommand()
